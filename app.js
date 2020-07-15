@@ -14,7 +14,7 @@ global.constants = constants;
 
 global.defaultConfig = {
   style: "theEvent",
-  language: "ar",
+  website_language: "ar",
 };
 const home = require("./routes/home/index");
 const admin = require("./routes/admin/index");
@@ -62,8 +62,6 @@ mysqlConnection.getConnection((err, connection) => {
     }
   });
 });
-//
-app.set("defaultStyle", defaultConfig.style);
 
 //
 app.set("view engine", "handlebars");
@@ -80,6 +78,9 @@ app.engine(
       },
       texts: function (name) {
         return __(name);
+      },
+      getLocale: function () {
+        return getLocale();
       },
     },
   })
@@ -107,17 +108,16 @@ app.on("ready", () => {
     directory: path.join(__dirname, "public", "/lang"),
     queryParameter: "lang",
     register: global,
-    defaultLocale: global.defaultConfig.websiteLanguage || "en",
+    defaultLocale: global.defaultConfig.website_language || "ar",
     cookie: "i18n",
   });
   app.use((req, res, next) => {
-    var lang = global.defaultConfig.websiteLanguage;
-    console.log(lang);
+    var lang = global.defaultConfig.website_language;
 
     if (req.query.lang == "" || req.query.lang == undefined) {
       if (req.session.lang == "" || req.session.lang == undefined) {
         if (req.cookies.lang == "" || req.cookies.lang == undefined) {
-          lang = global.defaultConfig.websiteLanguage;
+          lang = global.defaultConfig.website_language;
         } else {
           lang = req.cookies.lang;
           req.session.lang = lang;
@@ -132,7 +132,6 @@ app.on("ready", () => {
     }
 
     i18n.setLocale(lang);
-
     // // if (req.query.lang == "" || req.query.lang == undefined) {
     // //   //res.redirect("/");
     // //   res.set("Location", "/");

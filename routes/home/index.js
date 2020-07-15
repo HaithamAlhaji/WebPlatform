@@ -9,7 +9,7 @@ router.all("*", (req, res, next) => {
   next();
 });
 router.get("/", (req, res) => {
-  res.send("ffffffffff");
+  res.render("home/index", { title: global.__("home") });
 });
 router.get("*", (req, res) => {
   res.redirect("/");

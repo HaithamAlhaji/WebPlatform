@@ -13,8 +13,8 @@ module.exports = {
     database: process.env.mysql_database,
   },
   app: {
-    description: "Platform",
-    keyword: "Platform",
+    description: "IALD Platform",
+    keywords: "IALD Platform",
     author: "Haitham Alhaji",
     image: "website_img.png",
   },
