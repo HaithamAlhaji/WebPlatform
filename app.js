@@ -16,8 +16,11 @@ global.defaultConfig = {
   style: "theEvent",
   website_language: "ar",
 };
-const home = require("./routes/home/index");
+
 const admin = require("./routes/admin/index");
+const home = require("./routes/home/index");
+const entryPoint = require("./routes/home/entryPoint");
+const dashboard = require("./routes/home/dashboard");
 
 //
 const app = express();
@@ -93,9 +96,8 @@ app.use(bodyParser.json());
 app.use(
   expressSession({
     secret: constants.express.secret,
-    resave: true,
-    saveUninitialized: true,
-    cookie: { secure: true },
+    resave: false,
+    saveUninitialized: false,
   })
 );
 app.use(cookieParser(constants.express.secret));
@@ -113,7 +115,6 @@ app.on("ready", () => {
   });
   app.use((req, res, next) => {
     var lang = global.defaultConfig.website_language;
-
     if (req.query.lang == "" || req.query.lang == undefined) {
       if (req.session.lang == "" || req.session.lang == undefined) {
         if (req.cookies.lang == "" || req.cookies.lang == undefined) {
@@ -139,11 +140,30 @@ app.on("ready", () => {
     // // } else {
     // //   next();
     // // }
+
+    // checking user if logined
+    if (req.session.user === undefined) {
+      req.session.user = {};
+      req.session.user.email = "NONE";
+      req.session.user.name_en = "NONE";
+      req.session.user.name_ar = "NONE";
+      req.session.user.type = "0";
+    }
+    console.log(req.session.user.type);
+    res.locals.isLoggedIn = (
+      req.session.user.type.toString() != "0"
+    ).toString();
+    res.locals.isAdmin = (req.session.user.type == 2).toString();
+    res.locals.email = req.session.user.email;
+    res.locals.name_en = req.session.user.name_en;
+    res.locals.name_ar = req.session.user.name_ar;
+
     next();
   });
-  app.use("/", home);
+  app.use("/entryPoint", entryPoint);
+  app.use("/dashboard", dashboard);
   app.use("/admin", admin);
-  app.use;
+  app.use("/", home);
 
   // Start Listening
   app.listen(constants.express.port, () => {

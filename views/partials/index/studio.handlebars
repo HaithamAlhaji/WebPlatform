@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="/css/{{default "style"}}/index/studio.css">
+
+<!-- ======= studio Section ======= -->
+<section id="studio">
+
+    <div class="container-fluid" data-aos="fade-up">
+
+        <div class="section-header">
+            <h2>
+                <i class="fa fa-video-camera" aria-hidden="true"></i>
+                {{texts "studio"}}
+            </h2>
+            <p>{{texts "studio_description"}}</p>
+        </div>
+
+        <div class="row no-gutters">
+            <div class="col-lg-6 studio-map">
+                <iframe
+                    src="https://www.google.com/maps/embed/v1/place?q=place_id:EldCYWjDp2VsaWV2bGVyIE1lcmtleiwgS29taWsgSGFzYW5lZmVuZGkgU29rYcSfxLEsIDM0MTgwIEJhaMOnZWxpZXZsZXIvxLBzdGFuYnVsLCBUdXJrZXkiLiosChQKEgkBmv2DTbvKFBHEivO72ZZ5mBIUChIJiyJprkm7yhQRWl4LKRC5NgI&key=AIzaSyB0t2-STt2D4fcurLRT96mMgRBshR8DfKo"
+                    frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+
+            <div class="col-lg-6 studio-info">
+                <div class="row justify-content-center">
+                    <div class="col-11 col-lg-8">
+                        <h3>{{default "studio_title"}}</h3>
+                        <p>
+                            {{default "studio_description"}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container-fluid studio-gallery-container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row no-gutters">
+
+            {{#each studioImages}}
+            <div class="col-lg-3 col-md-4">
+                <div class="studio-gallery">
+                    <a href="/uploads/{{image}}" class="venobox" data-gall="studio-gallery">
+                        <img src="/uploads/{{image}}" alt="" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+    </div>
+
+</section><!-- End studio Section -->

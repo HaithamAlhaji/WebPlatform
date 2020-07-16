@@ -2,46 +2,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
-<link rel="icon" href="./img/favicon.png" type="image/x-icon">
-<link rel="apple-touch-icon" href="./img/favicon.png">
+<link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.png" type="image/x-icon">
+<link rel="apple-touch-icon" href="/img/favicon.png">
 
 {{!-- Global | End --}}
 
 {{!-- Style | Start --}}
 {{#ifEquals (texts "direction") "rtl"}}
-<link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap-rtl.min.css">
-<link rel="stylesheet" href="./css/{{default "style"}}/style.rtl.css">
-<style>
-    *:not(.fas),
-    *:not(.fab),
-    *:not(.fa),
-        {
-        font-family: 'Cairo', sans-serif !important;
-    }
-</style>
+<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-rtl.min.css">
+
 {{/ifEquals}}
 {{#ifEquals (texts "direction") "ltr"}}
-<link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
 
-<link rel="stylesheet" href="./css/{{default "style"}}/style.ltr.css">
-<style>
-    *:not(.fas),
-    *:not(.fab),
-    *:not(.fa),
-        {
-        font-family: 'Raleway', sans-serif;
-    }
-</style>
 {{/ifEquals}}
 {{!-- Style | End --}}
 
 {{!-- Libraries | Start --}}
 
-<link href="./vendor/venobox/venobox.css" rel="stylesheet">
-<link href="./vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-<link href="./vendor/aos/aos.css" rel="stylesheet">
-<link href="./vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
 {{!-- Libraries | End --}}
 
@@ -103,4 +83,4 @@
 <meta property="og:url" content="{{default "website_url"}}">
 
 {{!-- Meta | End --}}
-<link rel="stylesheet" href="./css/{{default "style"}}/style.css">
+<link rel="stylesheet" href="/css/{{default "style"}}/style.css">

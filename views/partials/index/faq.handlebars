@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/css/{{default "style"}}/index/faq.css">
+
+<!-- =======  F.A.Q Section ======= -->
+<section id="faq">
+
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+            <h2>{{texts "faq"}}</h2>
+            <p>{{texts "faq_description"}}</p>
+        </div>
+
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-9">
+                <ul id="faq-list">
+                    {{#each faq}}
+                    <li>
+                        <a data-toggle="collapse" class="collapsed" href="#faq{{id}}">{{question}} <i
+                                class="fa fa-minus-circle"></i></a>
+                        <div id="faq{{id}}" class="collapse" data-parent="#faq-list">
+                            <p>
+                                {{answer}}
+                            </p>
+                        </div>
+                    </li>
+                    {{/each}}
+
+
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</section><!-- End  F.A.Q Section -->

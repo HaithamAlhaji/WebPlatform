@@ -1,0 +1,89 @@
+<link rel="stylesheet" href="/css/{{default "style"}}/index/contact.css">
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="section-bg">
+
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+            <h2>
+                <i class="fa fa-bell" aria-hidden="true"></i>
+                {{texts "contact"}}
+            </h2>
+            <p>{{texts "contact_description"}}</p>
+        </div>
+
+        <div class="row contact-info">
+
+            <div class="col-md-4">
+                <div class="contact-address">
+                    <i class="ion-ios-location-outline"></i>
+                    <h3>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        {{texts "address"}}
+                    </h3>
+                    <address>
+                        {{default "website_address"}}
+                    </address>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="contact-phone">
+                    <i class="ion-ios-telephone-outline"></i>
+                    <h3>
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                        {{texts "phone"}}
+                    </h3>
+                    <p><a href="tel:{{default "website_phone"}}">{{default "website_phone"}}</a></p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="contact-email">
+                    <i class="ion-ios-email-outline"></i>
+                    <h3>
+                        <i class="fa fa-at" aria-hidden="true"></i>
+                        {{texts "email"}}
+                    </h3>
+                    <p><a href="mailto:{{default "website_email"}}">{{default "website_email"}}</a></p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" name="name" class="form-control" id="name"
+                            placeholder="{{texts "full_name"}}" data-rule="minlen:4"
+                            data-msg="Please enter at least 4 chars" />
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="{{texts "email"}}"
+                            data-rule="email" data-msg="{{texts "email_enter"}}" />
+                        <div class="validate"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="subject" id="subject"
+                        placeholder="{{texts "subject"}}" data-rule="minlen:4" data-msg="{{texts "subject_entry"}}" />
+                    <div class="validate"></div>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" name="message" rows="5" data-rule="required"
+                        data-msg="{{texts "message_enter"}}" placeholder="{{texts "message"}}"></textarea>
+                    <div class="validate"></div>
+                </div>
+                <div class="mb-3">
+                    <div class="loading">{{texts "loading"}}</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">{{texts "message_sent"}}</div>
+                </div>
+                <div class="text-center"><button type="submit">{{texts "send"}}</button></div>
+            </form>
+        </div>
+
+    </div>
+</section><!-- End Contact Section -->

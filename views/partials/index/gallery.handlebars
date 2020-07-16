@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/{{default "style"}}/index/gallery.css">
+
+<!-- ======= Gallery Section ======= -->
+<section id="gallery">
+
+        <div class="container" data-aos="fade-up">
+                <div class="section-header">
+                        <h2>
+                                <i class="fa fa-picture-o" aria-hidden="true"></i>
+
+                                {{texts "gallery"}}
+                        </h2>
+                        <p>{{texts "gallery_description"}}</p>
+                </div>
+        </div>
+
+        <div class="owl-carousel gallery-carousel" data-aos="fade-up" data-aos-delay="100">
+                {{#each gallery}}
+                <a href="/uploads/{{image}}" class="venobox" data-gall="gallery-carousel"><img src="/uploads/{{image}}"
+                                alt=""></a>
+                {{/each}}
+        </div>
+
+
+</section><!-- End Gallery Section -->

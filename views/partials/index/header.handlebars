@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="/css/{{default "style"}}/index/header.css">
+<!-- ======= Header ======= -->
+<header id="header">
+    <div class="container">
+
+        <div id="logo" class="pull-left">
+            <!-- Uncomment below if you prefer to use a text logo -->
+            <!-- <h1><a href="#intro">The<span>Event</span></a></h1>-->
+            <a href="index.html" class="scrollto">
+                <div class="img"></div>
+            </a>
+        </div>
+
+        <nav id="nav-menu-container">
+            <ul class="nav-menu">
+
+                <li class="btn-lang"><a style="background-color: none;" href="/entryPoint/login">
+
+                        {{#ifEquals isLoggedIn "true"}}
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        {{#ifEquals (getLocale) "en"}}
+                        {{name_en}}
+                        {{/ifEquals}}
+                        {{#ifEquals (getLocale) "ar"}}
+                        {{name_ar}}
+                        {{/ifEquals}}
+                        {{/ifEquals}}
+
+                        {{#ifEquals isLoggedIn "false"}}
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                        {{texts "login_or_register"}}
+                        {{/ifEquals}}
+                    </a>
+                </li>
+
+                <li class="menu-active"><a href="index.html">{{texts "home"}}</a></li>
+                <li><a href="#sponsors">{{texts "sponsors"}}</a></li>
+                <li><a href="#instructors">{{texts "instructors"}}</a></li>
+                <li><a href="#studio">{{texts "studio"}}</a></li>
+                <li><a href="#events">{{texts "events"}}</a></li>
+                <li><a href="#gallery">{{texts "gallery"}}</a></li>
+                <li><a href="#staff">{{texts "staff"}}</a></li>
+                {{!-- <li><a href="#contact">{{texts "contact"}}</a></li> --}}
+                {{#ifEquals (getLocale) "en"}}
+                <li class="btn-lang"><a style="background-color: none;" href="?lang=ar">العربية</a></li>
+                {{/ifEquals}}
+                {{#ifEquals (getLocale) "ar"}}
+                <li class="btn-lang"><a style="background-color: none;" href="?lang=en">English</a></li>
+                {{/ifEquals}}
+            </ul>
+        </nav><!-- #nav-menu-container -->
+    </div>
+</header><!-- End Header -->

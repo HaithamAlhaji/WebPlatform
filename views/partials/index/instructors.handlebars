@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="/css/{{default "style"}}/index/instructors.css">
+
+<!-- ======= instructors Section ======= -->
+<section id="instructors">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <h2>
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                {{texts "instructors"}}
+            </h2>
+            <p>{{texts "instructors_description"}}</p>
+        </div>
+
+        <div class="row">
+            {{#each instructors}}
+            <div class="col-lg-4 col-md-6">
+                <div class="instructor" data-aos="fade-up" data-aos-delay="100">
+                    <img src="/uploads/{{image}}" alt="instructor {{id}}" class="img-fluid">
+                    <div class="details">
+                        <h3><a href="/instructor/{{id}}">{{name}}</a></h3>
+                        <p>{{position}}</p>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+    </div>
+
+</section><!-- End instructors Section -->

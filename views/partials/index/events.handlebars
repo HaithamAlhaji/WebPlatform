@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="/css/{{default "style"}}/index/events.css">
+<!-- ======= events Section ======= -->
+<section id="events" class="section-with-bg">
+
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <h2>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                {{texts "events"}}
+            </h2>
+            <p>{{texts "event_description"}}</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+            {{#each events}}
+            <div class="col-lg-4 col-md-6">
+                <div class="event">
+                    <div class="event-img">
+                        <img src="/uploads/{{image}}" alt="event {{id}}" class="img-fluid">
+                    </div>
+                    <h3><a href="/event/{{id}}">{{title}}</a></h3>
+                    <div class="stars">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <p>{{datetime}}</p>
+                </div>
+            </div>
+            {{/each}}
+
+
+
+        </div>
+    </div>
+
+</section><!-- End events Section -->

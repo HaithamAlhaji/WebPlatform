@@ -1,0 +1,96 @@
+/*--------------------------------------------------------------
+# staff Section
+--------------------------------------------------------------*/
+#staff {
+  padding: 60px 0 30px 0;
+}
+
+#staff .co-staff {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+#staff .co-staff .details {
+  background: rgba(6, 12, 34, 0.76);
+  position: absolute;
+  left: 0;
+  bottom: -30px;
+  right: 0;
+  text-align: center;
+  padding-top: 10px;
+  -webkit-transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#staff .co-staff .details h3 {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+#staff .co-staff .details p {
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+#staff .co-staff .details .social {
+  height: 30px;
+}
+
+#staff .co-staff .details a {
+  color: #fff;
+}
+
+#staff .co-staff .details a:hover {
+  color: #0f7760;
+}
+
+#staff .co-staff:hover .details {
+  bottom: 0;
+}
+
+#staff-details {
+  padding: 60px 0;
+}
+
+#staff-details .details h2 {
+  color: #112363;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+#staff-details .details .social {
+  margin-bottom: 15px;
+}
+
+#staff-details .details .social a {
+  background: #e9edfb;
+  color: #112363;
+  line-height: 1;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding-top: 9px;
+}
+
+#staff-details .details .social a:hover {
+  background: #0f7760;
+  color: #fff;
+}
+
+#staff-details .details .social a i {
+  font-size: 18px;
+}
+
+#staff-details .details p {
+  color: #112363;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
