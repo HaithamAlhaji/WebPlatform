@@ -1,5 +1,3 @@
-// Login - Register - Forget Password - Verification
-
 const express = require("express"),
   form = require("express-form"),
   field = form.field,
@@ -18,7 +16,7 @@ router.get("/", (req, res) => {
     req.session.user.email != "NONE" &&
     (req.session.user.type == "1" || req.session.user.userType == "2")
   ) {
-    res.render("home/dashboard", {
+    res.render("home/dashboard/index", {
       title: global.__("dashbaord"),
     });
   } else {

@@ -1345,14 +1345,14 @@ body .container.body .right_col {
   float: left;
   background: #2a3f54;
   border-radius: 0;
-  height: 57px;
+  height: 80px;
   padding: 0px;
 }
 
 @media (max-width: 991px) {
   .nav-md .container.body .right_col,
   .nav-md .container.body .top_nav {
-    width: 100%;
+    width: 100% !important;
     margin: 0;
   }
   .nav-md .container.body .col-md-3.left_col {
@@ -1827,7 +1827,7 @@ a:focus {
 }
 
 .nav-md ul.nav.child_menu li:after {
-  border-left: 1px solid #425668;
+  border-right: 1px solid #425668;
   bottom: 0;
   content: "";
   left: 27px;
@@ -2011,35 +2011,6 @@ a:focus {
 .bs-docs-sidebar .nav > li > a {
   display: block;
   padding: 4px 6px;
-}
-
-footer {
-  background: #fff;
-  padding: 10px 20px;
-  display: block;
-}
-
-.nav-sm footer {
-  margin-left: 70px;
-}
-
-.footer_fixed footer {
-  position: fixed;
-  left: 0px;
-  bottom: 0px;
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .footer_fixed footer {
-    margin-left: 0;
-  }
-}
-
-@media (min-width: 768px) {
-  .footer_fixed .nav-sm footer {
-    margin-left: 0;
-  }
 }
 
 .tile-stats.sparkline {
@@ -6193,4 +6164,21 @@ ul.notifications {
 
 .calendar-exibit .calendar-table {
   padding: 0 0 4px 0;
+}
+
+.nav_title .img {
+  background-image: url("/img/favicon.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-clip: border-box;
+  background-origin: border-box;
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+.nav_title li {
+  display: inline-block;
 }

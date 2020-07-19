@@ -1,0 +1,35 @@
+.pull-left {
+  float: right !important;
+}
+
+#nav-menu-container {
+  float: left !important;
+}
+
+.nav-menu > li {
+  float: right !important;
+}
+
+/* Mobile Nav Toggle */
+#mobile-nav-toggle {
+  left: 0;
+  right: unset !important;
+  margin: 15px 0 0 15px !important;
+}
+
+#faq #faq-list i {
+  left: 0 !important;
+  right: unset !important;
+}
+
+#logo .img {
+  background-image: url("/img/logo_header_ar.png");
+}
+
+footer .img {
+  background-image: url("/img/logo_header_ar.png");
+}
+
+#gallery .container .section-header {
+  direction: rtl;
+}

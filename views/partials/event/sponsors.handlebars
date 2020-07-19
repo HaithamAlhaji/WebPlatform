@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/css/{{default "style"}}/event/sponsors.css">
+
+<!-- ======= sponsors Section ======= -->
+<section id="sponsors" class="">
+
+    <div class="container" data-aos="fade-up">
+        {{!-- <div class="section-header">
+            <h2>
+                <i class="fa fa-bolt" aria-hidden="true"></i>
+
+                {{texts "sponsors"}}
+            </h2>
+            <p>{{texts "sponsors_description"}}</p>
+
+        </div> --}}
+
+        <div class="row no-gutters sponsors-wrap clearfix justify-content-center" data-aos="zoom-in"
+            data-aos-delay="100">
+            {{#each sponsors}}
+
+            <div class="col-6">
+                <div class="supporter-logo">
+                    <div class="img" style="background-image: url('/uploads/{{image}}');"></div>
+                </div>
+            </div>
+            {{/each }}
+
+
+        </div>
+
+    </div>
+
+</section><!-- End Sponsors Section -->

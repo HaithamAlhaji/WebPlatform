@@ -21,6 +21,7 @@ const admin = require("./routes/admin/index");
 const home = require("./routes/home/index");
 const entryPoint = require("./routes/home/entryPoint");
 const dashboard = require("./routes/home/dashboard");
+const event = require("./routes/home/event");
 
 //
 const app = express();
@@ -78,6 +79,9 @@ app.engine(
       },
       ifEquals: function (arg1, arg2, options) {
         return arg1 == arg2 ? options.fn(this) : options.inverse(this);
+      },
+      ifNotEquals: function (arg1, arg2, options) {
+        return arg1 != arg2 ? options.fn(this) : options.inverse(this);
       },
       texts: function (name) {
         return __(name);
@@ -149,7 +153,6 @@ app.on("ready", () => {
       req.session.user.name_ar = "NONE";
       req.session.user.type = "0";
     }
-    console.log(req.session.user.type);
     res.locals.isLoggedIn = (
       req.session.user.type.toString() != "0"
     ).toString();
@@ -162,6 +165,7 @@ app.on("ready", () => {
   });
   app.use("/entryPoint", entryPoint);
   app.use("/dashboard", dashboard);
+  app.use("/event", event);
   app.use("/admin", admin);
   app.use("/", home);
 

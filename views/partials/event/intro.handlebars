@@ -1,0 +1,106 @@
+<link rel="stylesheet" href="/css/{{default "style"}}/event/intro.css">
+
+<!-- ======= Intro Section ======= -->
+<section id="intro" {{#ifNotEquals event.background ""}} style="background-image: url('/uploads/{{event.background}}');"
+    {{/ifNotEquals}}>
+    <div class="intro-container" data-aos="zoom-in" data-aos-delay="100">
+
+        {{>event/sponsors}}
+
+        <p class="mb-4 pb-0">{{event.title}}</p>
+        {{#ifEquals event.is_finish 0}}
+        {{#ifEquals event.is_live 0}}
+        {{!-- countdown --}}
+        <div class="countdown" dir="rtl">
+            <a href="#" class="twitter">
+                <div class="countdownValue" id="seconds">59</div>
+                <div class="countdownTitle">{{texts "second"}}</div>
+            </a>
+            <a href="#" class="facebook">
+                <div class="countdownValue " id="minutes">59</div>
+                <div class="countdownTitle">{{texts "minute"}}</div>
+            </a>
+            <a href="#" class="instagram">
+                <div class="countdownValue " id="hours">23</div>
+                <div class="countdownTitle">{{texts "hour"}}</div>
+            </a>
+            <a href="#" class="youtube">
+                <div class="countdownValue " id="days">31</div>
+                <div class="countdownTitle">{{texts "day"}}</div>
+            </a>
+        </div>
+        {{/ifEquals}}
+        {{/ifEquals}}
+
+
+
+
+
+
+        {{#ifEquals event.is_live 1}}
+        {{!-- play live --}}
+        <a href="{{event.live_url}}" class="venobox play-btn mb-4"></a>
+        {{/ifEquals}}
+
+
+
+
+        {{#ifEquals event.is_enrollable 1}}
+        {{#ifEquals event.is_finish 0}}
+        {{!-- can enroll in event --}}
+
+
+        {{#ifEquals userIsEnrolled true}}
+        <a href="#" class="about-btn scrollto">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            {{texts "event_enrolled"}}
+        </a>
+
+        {{/ifEquals}}
+        {{#ifEquals userIsEnrolled false}}
+        <a href="/event/{{event.id}}/enroll" class="about-btn scrollto">
+            <i class="fa fa-hand-o-up" aria-hidden="true"></i>
+            {{texts "event_enroll"}}
+        </a>
+
+        {{/ifEquals}}
+
+
+
+
+        {{/ifEquals}}
+        {{/ifEquals}}
+
+        {{#ifEquals event.is_finish 1}}
+        {{!-- download certification --}}
+
+        <a href="/event/{{event.id}}/certification" class="about-btn scrollto">
+            <i class="fa fa-download" aria-hidden="true"></i>
+
+            {{texts "certification"}}
+        </a>
+        {{/ifEquals}}
+    </div>
+</section><!-- End Intro Section -->
+<script>
+    function countdownTimer() {
+        const difference = +new Date("{{event.datetime}}") - +new Date();
+        let remaining = "Time's up!";
+
+        if (difference > 0) {
+
+            const parts = {
+                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+                hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+                minutes: Math.floor((difference / 1000 / 60) % 60),
+                seconds: Math.floor((difference / 1000) % 60)
+            };
+            document.getElementById("seconds").innerHTML = parts.seconds;
+            document.getElementById("minutes").innerHTML = parts.minutes;
+            document.getElementById("hours").innerHTML = parts.hours;
+            document.getElementById("days").innerHTML = parts.days;
+        }
+    }
+    countdownTimer();
+    setInterval(countdownTimer, 1000);
+</script>

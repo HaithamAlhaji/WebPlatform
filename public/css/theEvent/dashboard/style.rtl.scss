@@ -1,0 +1,84 @@
+.nav-md .container.body .right_col {
+  margin-right: 230px;
+  margin-left: unset;
+}
+.main_container .top_nav {
+  margin-right: 230px;
+  margin-left: unset;
+}
+.nav-sm .nav.child_menu li.active,
+.nav-sm .nav.side-menu li.active-sm {
+  border-right: unset;
+  border-left: 5px solid #1abb9c;
+}
+.nav-sm .container.body .right_col {
+  margin-right: 70px;
+  margin-left: unset;
+}
+.main_menu span.fa {
+  float: left;
+}
+.menu_section h3 {
+  padding-left: unset;
+  padding-right: 23px;
+}
+.timeline h2.title:before {
+  left: unset;
+  right: -23px;
+}
+.timeline .block {
+  border-right: 3px solid #e8e8e8;
+  border-left: 0px solid #e8e8e8;
+}
+.nav.child_menu li {
+  padding-right: 36px;
+  padding-left: unset;
+}
+
+.nav-md ul.nav.child_menu li:before {
+  left: unset;
+  right: 23px;
+}
+.nav-md ul.nav.child_menu li:before {
+  border-right: 1px solid #425668;
+  bottom: 0;
+  content: "";
+  left: 27px;
+  position: absolute;
+  top: 0;
+}
+.nav-sm .main_container .top_nav {
+  margin-right: 70px;
+  margin-left: 0px;
+}
+@media (max-width: 991px) {
+  .nav-md .container.body .right_col {
+    margin-right: 0;
+  }
+}
+.toggle {
+  float: right;
+}
+.top_nav .navbar-right li {
+  float: left;
+}
+.user-profile img {
+  margin-right: 0;
+  margin-left: 10px;
+}
+.profile_pic {
+  float: right;
+}
+.img-circle.profile_img {
+  margin-right: 15%;
+  margin-left: unset;
+}
+.dropdown-menu .dropdown-usermenu .pull-right .show {
+  transform: translate3d(150px, 25px, 0px) !important;
+}
+@media (min-width: 992px) {
+  footer {
+    margin-left: unset;
+    margin-right: 230px;
+  }
+}

@@ -22,9 +22,49 @@ router.get("/login", (req, res) => {
     (req.session.user.type == "1" || req.session.user.userType == "2")
   ) {
     res.redirect("/dashboard");
-    res.send("dashboard");
+    // res.send("dashboard");
   } else {
-    res.render("home/login", { title: global.__("login") });
+    // display message for who come from event to download certification
+    const userEventId = req.session.user.eventId;
+
+    if (userEventId != undefined) {
+      mysqlConnection.getConnection((err, connection) => {
+        if (err) {
+          connection.release();
+          console.log(err);
+          res.render("home/login", {
+            title: global.__("login"),
+            error: err,
+          });
+        }
+        const sqlQuery = `SELECT title from tbl_events where id = ?;`;
+        connection.query(sqlQuery, [userEventId], (errors, results, fields) => {
+          connection.release();
+          if (errors) {
+            console.log(errors);
+            res.render("home/login", {
+              title: global.__("login"),
+              error: errors,
+            });
+          }
+          const eventTitle = results[0].title;
+          res.render("home/login", {
+            title: global.__("login"),
+            caption: global.__(
+              req.session.user.requestType == 0
+                ? "enroll_in_event"
+                : "download_event_certifcation"
+            ),
+            eventTitle: eventTitle,
+          });
+        });
+      });
+    } else {
+      // normal login without any parameters
+      res.render("home/login", {
+        title: global.__("login"),
+      });
+    }
   }
 });
 router.post(
@@ -52,23 +92,35 @@ router.post(
           (errors, results, fields) => {
             connection.release();
             if (errors) {
+              console.error(errors);
+              connection.release();
               res.render("home/login", {
                 title: global.__("login"),
                 error: errors,
               });
-              console.error(errors);
-              connection.release();
             }
             if (results.length > 0) {
+              const userEventId = req.session.user.eventId; // login for downloading a specific certification
+              const userRequestType = req.session.user.requestType;
               req.session.user = {};
               req.session.user.id = results[0].id;
               req.session.user.email = results[0].email;
               req.session.user.name_en = results[0].name_en;
               req.session.user.name_ar = results[0].name_ar;
               req.session.user.type = results[0].type;
-              res.redirect("/dashboard");
+              req.session.user.requestType = userRequestType;
+              if (userEventId != undefined) {
+                // login for downloading a specific certification or enroll
+                console.log(req.session.user.type.requestType);
+                res.redirect(
+                  `/event/${userEventId}/${
+                    userRequestType == 0 ? "enroll" : "certification"
+                  }`
+                );
+              } else {
+                res.redirect("/dashboard");
+              }
             } else {
-              console.error("bbbbbbbb");
               console.error("email or password is wrong");
               res.render("home/login", {
                 title: "11111111111111111",
@@ -89,6 +141,7 @@ router.post(
   }
 );
 router.get("/register", (req, res) => {
+  console.log(req.session.user.requestType);
   res.render("home/register", {
     title: global.__("register_page"),
   });
@@ -104,8 +157,15 @@ router.post(
   (req, res) => {
     if (req.form.isValid) {
       mysqlConnection.getConnection((err, connection) => {
-        const sqlQuery =
-          "insert into tbl_users (email,password,name_en) values (?,md5(?),?);select id,email,name_en,name_ar,type from tbl_users where email = ? and password = md5(?);";
+        const eventId = req.session.user.eventId;
+        const userRequestType = req.session.user.requestType;
+
+        const enrollingInEvent = `insert INTO tbl_events_users (event_id,user_id) SELECT ${eventId},LAST_INSERT_ID() WHERE (SELECT is_enrollable FROM tbl_events WHERE id = ${eventId}) = 1;`;
+
+        const sqlQuery = `insert into tbl_users (email,password,name_en) values (?,md5(?),?); ${
+          req.session.user.requestType == 1 ? enrollingInEvent : ""
+        } select id,email,name_en,name_ar,type from tbl_users where email = ? and password = md5(?);`;
+        console.log(sqlQuery);
         connection.query(
           sqlQuery,
           [
@@ -116,7 +176,6 @@ router.post(
             req.body.txtPassword,
           ],
           (errors, results, fields) => {
-            console.log(sqlQuery);
             connection.release();
             if (errors) {
               console.error(errors);
@@ -125,15 +184,31 @@ router.post(
                 error: errors,
               });
             } else {
-              console.error(results[1][0]);
+              const index = userRequestType == 1 ? 2 : 1; // 3 queries
+              console.log(index);
               req.session.user = {};
-              req.session.user.id = results[1][0].id;
-              req.session.user.email = results[1][0].email;
-              req.session.user.name_en = results[1][0].name_en;
-              req.session.user.name_ar = results[1][0].name_ar;
-              req.session.user.type = results[1][0].type;
-              console.error(req.session.user.type);
-              res.redirect("/dashboard");
+              req.session.user.id = results[index][0].id;
+              req.session.user.email = results[index][0].email;
+              req.session.user.name_en = results[index][0].name_en;
+              req.session.user.name_ar = results[index][0].name_ar;
+              req.session.user.type = results[index][0].type;
+              req.session.user.eventId = eventId;
+              req.session.user.requestType = userRequestType;
+
+              if (eventId != undefined) {
+                console.log(
+                  `/event/${eventId}/${
+                    userRequestType == 0 ? "enroll" : "certification"
+                  }`
+                );
+                res.redirect(
+                  `/event/${eventId}/${
+                    userRequestType == 0 ? "enroll" : "certification"
+                  }`
+                );
+              } else {
+                res.redirect("/dashboard");
+              }
             }
           }
         );

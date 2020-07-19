@@ -15,13 +15,13 @@ router.get("/", (req, res) => {
       connection.release();
     }
     const sqlQuery = `
-      select id,name,image from tbl_sponsors ORDER by id DESC limit 0,8;
-      select id,name,image,position from tbl_instructors ORDER by id DESC limit 0,8;
-      select id,title,image,DATE_FORMAT(\`datetime\`,'%Y-%m-%d') as \`datetime\` from tbl_events ORDER by id DESC limit 0,3;
-      select image from tbl_gallery ORDER by id DESC limit 0,8;
-      select id,question,answer from tbl_faq;
-      select id,name,image,position,facebook,twitter,email,instagram from tbl_staff;
-      select image from tbl_studio_images order by id desc limit 0,8;
+    select id,name,image from tbl_sponsors ORDER by id DESC limit 0,8;
+    select id,name,image,position from tbl_instructors ORDER by id DESC limit 0,8;
+    select id,title,image,DATE_FORMAT(\`datetime\`,'%Y-%m-%d') as \`datetime\` from tbl_events ORDER by id DESC limit 0,3;
+    select image from tbl_gallery ORDER by id DESC limit 0,8;
+    select id,question,answer from tbl_faq;
+    select id,name,image,position,facebook,twitter,email,instagram from tbl_staff;
+    select image from tbl_studio_images order by id desc limit 0,8;
       `;
     connection.query(sqlQuery, (errors, results, fields) => {
       if (errors) {

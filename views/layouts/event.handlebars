@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{getLocale}}">
+
+<head>
+    {{>headContent}}
+    <link href="/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/vendor/aos/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/{{default "style"}}/event/style.css">
+    {{#ifEquals (texts "direction") "rtl"}}
+    <link rel="stylesheet" href="/css/{{default "style"}}/event/style.rtl.css">
+    {{/ifEquals}}
+    {{#ifEquals (texts "direction") "ltr"}}
+    <link rel="stylesheet" href="/css/{{default "style"}}/event/style.ltr.css">
+    {{/ifEquals}}
+
+</head>
+
+<body lang="{{getLocale}}">
+    {{{body}}}
+
+    {{>footerContent}}
+    <script src="/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="/vendor/venobox/venobox.min.js"></script>
+    <script src="/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="/vendor/superfish/superfish.min.js"></script>
+    <script src="/vendor/hoverIntent/hoverIntent.js"></script>
+    <script src="/vendor/aos/aos.js"></script>
+    <script src="/js/event.js"></script>
+</body>
+
+</html>
