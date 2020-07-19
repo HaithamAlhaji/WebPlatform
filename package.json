@@ -28,6 +28,8 @@
     "express": "^4.17.1",
     "express-form": "^0.12.6",
     "express-handlebars": "^5.0.0",
-    "express-session": "^1.17.1"
+    "express-session": "^1.17.1",
+    "i18n": "^0.10.0",
+    "mysql": "^2.18.1"
   }
 }
