@@ -12,6 +12,14 @@ module.exports = {
     password: process.env.mysql_password,
     database: process.env.mysql_database,
   },
+  email: {
+    server: process.env.email_server,
+    port: process.env.email_port,
+    auth: {
+      user: process.env.email_user,
+      password: process.env.email_password,
+    },
+  },
   app: {
     description: "IALD Platform",
     keywords: "IALD Platform",

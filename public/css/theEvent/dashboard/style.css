@@ -1521,13 +1521,11 @@ body {
 
 .page-title {
   width: 100%;
-  height: 65px;
   padding: 10px 0;
 }
 
 .page-title .title_left {
-  width: 45%;
-  float: left;
+  width: 100%;
   display: block;
 }
 
@@ -6181,4 +6179,13 @@ ul.notifications {
 
 .nav_title li {
   display: inline-block;
+}
+
+.table-responsive {
+  overflow-x: visible;
+}
+
+table.dataTable.nowrap th,
+table.dataTable.nowrap td {
+  white-space: normal !important;
 }

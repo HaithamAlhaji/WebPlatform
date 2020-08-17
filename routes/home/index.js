@@ -59,6 +59,11 @@ router.get("/", (req, res) => {
   });
 });
 router.get("*", (req, res) => {
-  res.redirect("/");
+  //console.log(req);
+  res.status(404).send("/404");
+});
+router.post("*", (req, res) => {
+  //console.log(req);
+  res.status(404).send("/404");
 });
 module.exports = router;

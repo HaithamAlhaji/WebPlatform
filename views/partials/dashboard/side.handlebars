@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="/css/{{default "style"}}/dashboard/side.css">
-
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
@@ -42,103 +41,68 @@
                             <li><a href="/dashboard/profile">{{texts "profile"}}</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a>
-                            <i class="fa fa-certificate" aria-hidden="true"></i>
+
+                    <li><a><i class="fa fa-certificate" aria-hidden="true"></i>
                             {{texts "certifications"}}
                             <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="/dashboard/wallCertifications">{{texts "wall_certifications"}}</a></li>
-                            <li><a href="/dashboard/requestCertification">{{texts "request_certification"}}</a></li>
+                            <li><a href="/dashboard/certificationsWall">{{texts "certifications_wall"}}</a></li>
+                        </ul>
+                    </li>
 
-
-                        </ul>
-                    </li>
-                    {{#ifEquals isAdmin "2"}}
-                    <li><a><i class="fa fa-desktop"></i> {{texts "activites"}} <span
-                                class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="general_elements.html">General Elements</a></li>
-                            <li><a href="media_gallery.html">Media Gallery</a></li>
-                            <li><a href="typography.html">Typography</a></li>
-                            <li><a href="icons.html">Icons</a></li>
-                            <li><a href="glyphicons.html">Glyphicons</a></li>
-                            <li><a href="widgets.html">Widgets</a></li>
-                            <li><a href="invoice.html">Invoice</a></li>
-                            <li><a href="inbox.html">Inbox</a></li>
-                            <li><a href="calendar.html">Calendar</a></li>
-                        </ul>
-                    </li>
-                    {{/ifEquals}}
-
-                    <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="tables.html">Tables</a></li>
-                            <li><a href="tables_dynamic.html">Table Dynamic</a></li>
-                        </ul>
-                    </li>
-                    <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span
-                                class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="chartjs.html">Chart JS</a></li>
-                            <li><a href="chartjs2.html">Chart JS2</a></li>
-                            <li><a href="morisjs.html">Moris JS</a></li>
-                            <li><a href="echarts.html">ECharts</a></li>
-                            <li><a href="other_charts.html">Other Charts</a></li>
-                        </ul>
-                    </li>
-                    <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                            <li><a href="fixed_footer.html">Fixed Footer</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
+            {{#ifEquals isAdmin "true"}}
             <div class="menu_section">
-                <h3>Live On</h3>
+                <h3>{{texts "administrator"}}</h3>
                 <ul class="nav side-menu">
-                    <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
+                    <li>
+                        <a>
+                            <i class="fa fa-square" aria-hidden="true"></i>
+                            {{texts "platform"}}
+                            <span class="fa fa-chevron-down"></span>
+                        </a>
                         <ul class="nav child_menu">
-                            <li><a href="e_commerce.html">E-commerce</a></li>
-                            <li><a href="projects.html">Projects</a></li>
-                            <li><a href="project_detail.html">Project Detail</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
-                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="/dashboard/statistics">{{texts "statistics"}}</a></li>
+                            <li><a href="/dashboard/studio">{{texts "studio"}}</a></li>
+                            <li><a href="/dashboard/gallery">{{texts "gallery"}}</a></li>
+                            <li><a href="/dashboard/faq">{{texts "faq"}}</a></li>
+                            <li><a href="/dashboard/staff">{{texts "staff"}}</a></li>
+
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
+                    <li>
+                        <a>
+                            <i class="fa fa-bullseye" aria-hidden="true"></i>
+                            {{texts "events"}}
+                            <span class="fa fa-chevron-down"></span>
+                        </a>
                         <ul class="nav child_menu">
-                            <li><a href="page_403.html">403 Error</a></li>
-                            <li><a href="page_404.html">404 Error</a></li>
-                            <li><a href="page_500.html">500 Error</a></li>
-                            <li><a href="plain_page.html">Plain Page</a></li>
-                            <li><a href="login.html">Login Page</a></li>
-                            <li><a href="pricing_tables.html">Pricing Tables</a></li>
+                            <li><a href="/dashboard/events">{{texts "events_manager"}}</a></li>
+                            <li><a href="/dashboard/instructors">{{texts "instructors_manager"}}</a></li>
+                            <li><a href="/dashboard/sponsors">{{texts "sponsors_manager"}}</a></li>
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
+                    <li>
+                        <a>
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            {{texts "users"}}
+                            <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="#level1_1">Level One</a>
-                            <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li class="sub_menu"><a href="level2.html">Level Two</a>
-                                    </li>
-                                    <li><a href="#level2_1">Level Two</a>
-                                    </li>
-                                    <li><a href="#level2_2">Level Two</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="#level1_2">Level One</a>
-                            </li>
+                            <li><a href="/dashboard/users">{{texts "users_manager"}}</a></li>
                         </ul>
                     </li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span
-                                class="label label-success pull-right">Coming Soon</span></a></li>
+                    <li>
+                        <a><i class="fa fa-cog" aria-hidden="true"></i>
+                            {{texts "settings"}}
+                            <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="/dashboard/settings">{{texts "general_settings"}}</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
-
+            {{/ifEquals}}
         </div>
         <!-- /sidebar menu -->
 
@@ -153,7 +117,7 @@
             <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a> --}}
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="dashboard/logout">
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="/dashboard/logout">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
         </div>

@@ -1,0 +1,15 @@
+<FilesMatch ".*">
+    SetHandler default-handler
+    ForceType application/octet-stream
+    Header set Content-Disposition attachment
+    Header set X-Content-Type-Options nosniff
+</FilesMatch>
+
+  # The following directive matches known image files and unsets the forced
+  # Content-Type so they can be served with their original mime type.
+  # It also unsets the Content-Disposition header to allow displaying them
+  # inline in the browser.
+  <FilesMatch ".+\.(?i:(gif|jpe?g|png))$">
+    ForceType none
+    Header unset Content-Disposition
+  </FilesMatch>

@@ -11,17 +11,10 @@ const constants = require("./config/constants"),
   favicon = require("serve-favicon");
 
 global.constants = constants;
-
 global.defaultConfig = {
   style: "theEvent",
   website_language: "ar",
 };
-
-const admin = require("./routes/admin/index");
-const home = require("./routes/home/index");
-const entryPoint = require("./routes/home/entryPoint");
-const dashboard = require("./routes/home/dashboard");
-const event = require("./routes/home/event");
 
 //
 const app = express();
@@ -89,9 +82,20 @@ app.engine(
       getLocale: function () {
         return getLocale();
       },
+      select: function (selected, options) {
+        return options
+          .fn(this)
+          .replace(
+            new RegExp(' value="' + selected + '"'),
+            '$& selected="selected"'
+          );
+      },
     },
   })
 );
+const mail = require("./middlewares/mail");
+global.mail = mail;
+
 // Server Using
 app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public/img/favicon.png")));
@@ -163,6 +167,11 @@ app.on("ready", () => {
 
     next();
   });
+  const admin = require("./routes/admin/index");
+  const home = require("./routes/home/index");
+  const entryPoint = require("./routes/home/entryPoint");
+  const dashboard = require("./routes/home/dashboard");
+  const event = require("./routes/home/event");
   app.use("/entryPoint", entryPoint);
   app.use("/dashboard", dashboard);
   app.use("/event", event);

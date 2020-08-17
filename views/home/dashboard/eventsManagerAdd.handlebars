@@ -1,0 +1,126 @@
+<!-- page content -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/bs4/dt-1.10.21/b-1.6.2/r-2.2.5/datatables.min.css" />
+
+<link href="/vendor/switchery/dist/switchery.min.css" rel="stylesheet">
+
+<div class="page-title">
+	<div class="title_left">
+		<h3>{{texts "events_manager"}} <small></small></h3>
+	</div>
+
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+
+
+	<div class="col-md-12 col-sm-12">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>{{texts "event_add"}} <small></small></h2>
+				<ul class="nav navbar-right panel_toolbox">
+					<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-expanded="false"><i class="fa fa-wrench"></i></a>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="#">Settings 1</a>
+							<a class="dropdown-item" href="#">Settings 2</a>
+						</div>
+					</li>
+					<li><a class="close-link"><i class="fa fa-close"></i></a>
+					</li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content" style="display: block;">
+				{{#if errors}}
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					{{errors}}
+				</div>
+				{{/if}}
+				<br>
+				<form class="form-horizontal form-label-left" action="./add" method="post"
+					enctype="multipart/form-data">
+
+					<div class="form-group row ">
+						<label class="control-label col-md-3 col-sm-3 ">{{texts "event_title"}}</label>
+						<div class="col-md-9 col-sm-9 ">
+							<input type="text" id="txtTitle" name="txtTitle" class="form-control"
+								placeholder="{{texts "event_title"}}">
+						</div>
+					</div>
+					<div class="form-group row ">
+						<label class="control-label col-md-3 col-sm-3 ">{{texts "event_live_url"}}</label>
+						<div class="col-md-9 col-sm-9 ">
+							<input type="text" class="form-control" id="txtLiveUrl" name="txtLiveUrl"
+								placeholder="{{texts "event_live_url"}}">
+						</div>
+					</div>
+
+					<div class="form-group row ">
+						<label class="control-label col-md-3 col-sm-3 ">{{texts "datetime"}}</label>
+						<div id="datetimepicker13" style="direction:ltr"></div>
+						<input type="text" id="txtDatetime" name="txtDatetime" style="display: none;">
+					</div>
+
+					<div class="form-group row">
+						<label class="control-label col-md-3 col-sm-3 ">{{texts "is_live"}}</label>
+						<div class="col-md-9 col-sm-9 ">
+							<input type="checkbox" class="js-switch" id="isLive" name="isLive" />
+
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label class="control-label col-md-3 col-sm-3 ">{{texts "is_enrollable"}}</label>
+						<div class="col-md-9 col-sm-9 ">
+							<input type="checkbox" class="js-switch" id="isEnrollable" name="isEnrollable" />
+
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="control-label col-md-3 col-sm-3 ">{{texts "is_finish"}}</label>
+						<div class="col-md-9 col-sm-9 ">
+							<input type="checkbox" class="js-switch" id="isFinish" name="isFinish" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="control-label col-md-3 col-sm-3 ">{{texts "image"}}</label>
+						<div class="col-md-9 col-sm-9 ">
+							<input type="file" accept="image/*" name="image">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="control-label col-md-3 col-sm-3 ">{{texts "background"}}</label>
+						<div class="col-md-9 col-sm-9 ">
+							<input type="file" accept="image/*" name="background">
+						</div>
+					</div>
+
+					<div class="ln_solid"></div>
+					<div class="form-group">
+						<div class="col-md-9 col-sm-9  offset-md-3">
+							{{!-- <button type="button" class="btn btn-primary">Cancel</button>
+							<button type="reset" class="btn btn-primary">Reset</button> --}}
+							<button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i>
+								{{texts "add"}}</button>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>
+<div class="row">
+
+</div>
+<script src="/vendor/switchery/dist/switchery.min.js"></script>

@@ -33,3 +33,8 @@ footer .img {
 #gallery .container .section-header {
   direction: rtl;
 }
+
+body.mobile-nav-active #mobile-nav {
+  left: unset;
+  right: 0;
+}

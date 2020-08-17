@@ -9,6 +9,8 @@
     <link href="/vendor/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
     <link href="/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
 
     <link rel="stylesheet" href="/css/{{default "style"}}/dashboard/style.css">
     {{#ifEquals (texts "direction") "rtl"}}
@@ -56,8 +58,33 @@
     <script src="/vendor/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <script src="/vendor/moment/min/moment.min.js"></script>
     <script src="/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
-
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/dt-1.10.21/b-1.6.2/r-2.2.5/datatables.min.js"></script>
     <script src="/js/dashboard.js"></script>
+    <script>
+        $('table').dataTable({
+            searching: false, paging: false, info: false, "columns": [
+                { "width": "10%" },
+                { "width": "80%" },
+                { "width": "10%" }
+            ]
+        });
+
+    </script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker13').datetimepicker({
+                inline: true,
+                sideBySide: true,
+                format: 'YYYY-MM-DD HH:mm:ss'
+            });
+            $('#datetimepicker13').on("change.datetimepicker", function (e) {
+                $("#txtDatetime").val(moment(e.date).format('YYYY-MM-DD HH:mm:ss'))
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,126 @@
+<!-- page content -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/bs4/dt-1.10.21/b-1.6.2/r-2.2.5/datatables.min.css" />
+
+<link href="/vendor/switchery/dist/switchery.min.css" rel="stylesheet">
+
+<div class="page-title">
+	<div class="title_left">
+		<h3>{{texts "events_manager"}} <small></small></h3>
+	</div>
+
+</div>
+
+<div class="clearfix"></div>
+<div class="row">
+	<div class="col-md-12 col-sm-12 ">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>{{texts "events"}}
+					<a href="./events/add" class="btn btn-success">
+						<i class="fa fa-plus" aria-hidden="true"></i>
+						{{texts "new"}}
+					</a>
+
+				</h2>
+				<ul class="nav navbar-right panel_toolbox">
+					<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+					</li>
+					{{!-- <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Settings 1</a>
+                            <a class="dropdown-item" href="#">Settings 2</a>
+                        </div>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li> --}}
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="card-box table-responsive">
+							<p class="text-muted font-13 m-b-30">
+								{{texts "events_description"}}
+							</p>
+
+							<div id="datatable-responsive_wrapper"
+								class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+
+								<div class="row">
+									<div class="col-sm-12">
+										<table id="datatable-responsive"
+											class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+											cellspacing="0" width="100%" role="grid"
+											aria-describedby="datatable-responsive_info" style="width: 100%;">
+											<thead>
+												<tr role="row">
+													<th class="sorting_asc" tabindex="0"
+														aria-controls="datatable-responsive" rowspan="1" colspan="1"
+														style="width: 110px;" aria-sort="ascending"
+														aria-label="First name: activate to sort column descending">
+														{{texts "actions"}}</th>
+													<th class="sorting" tabindex="0"
+														aria-controls="datatable-responsive" rowspan="1" colspan="1"
+														style="width: 110px;"
+														aria-label="Last name: activate to sort column ascending">
+														{{texts "event_title"}}</th>
+													<th class="sorting" tabindex="0"
+														aria-controls="datatable-responsive" rowspan="1" colspan="1"
+														style="width: 0px; display: none;"
+														aria-label="Position: activate to sort column ascending">
+														{{texts "event_users_count"}}</th>
+												</tr>
+											</thead>
+											<tbody>
+												{{#each events}}
+												<tr role="row" class="odd">
+													<td tabindex="0" class="sorting_1">
+														<div class="btn-group">
+															<button type="button"
+																class="btn btn-primary dropdown-toggle"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">
+																<i class="fa fa-cog" aria-hidden="true"></i>
+															</button>
+															<div class="dropdown-menu" x-placement="bottom-start"
+																style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+																<a href="/events/{{event_id}}/update"
+																	class="dropdown-item">
+																	<i class="fa fa-pencil-square"
+																		aria-hidden="true"></i>
+																	{{texts "edit"}}</a>
+																<div class="dropdown-divider"></div>
+																<a href="/events/{{event_id}}/remove"
+																	class="dropdown-item bg-danger text-white">
+																	<i class="fa fa-times" aria-hidden="true"></i>
+																	{{texts "remove"}}</a>
+
+															</div>
+														</div>
+													</td>
+													<td style="">{{event_title}}</td>
+													<td style="display: none;">{{events_users_count}}</td>
+													</td>
+												</tr>
+												{{/each}}
+
+
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/vendor/switchery/dist/switchery.min.js"></script>

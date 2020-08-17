@@ -32,3 +32,12 @@
 #sponsors img {
   transition: all 0.4s ease-in-out;
 }
+.supporter-logo .img {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-clip: border-box;
+  background-origin: border-box;
+  height: 100%;
+  width: 100%;
+}

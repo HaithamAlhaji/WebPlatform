@@ -69,5 +69,17 @@
 	"regsiter": "regsiter",
 	"enroll_in_event": "enroll_in_event",
 	"error": "error",
-	"event_enrolled": "event_enrolled"
+	"event_enrolled": "event_enrolled",
+	"profile_info": "profile_info",
+	"statistics": "statistics",
+	"certifications_wall": "certifications_wall",
+	"administrator": "administrator",
+	"platform": "platform",
+	"events_manager": "events_manager",
+	"instructors_manager": "instructors_manager",
+	"sponsors_manager": "sponsors_manager",
+	"users": "users",
+	"users_manager": "users_manager",
+	"settings": "settings",
+	"general_settings": "general_settings"
 }

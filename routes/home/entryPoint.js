@@ -3,11 +3,12 @@
 const express = require("express"),
   form = require("express-form"),
   field = form.field,
-  router = express.Router();
+  router = express.Router(),
+  nodemailer = require("nodemailer"),
+  nodemailerHandlebars = require("nodemailer-express-handlebars");
 
 router.all("*", (req, res, next) => {
   res.app.locals.layout = "entryPoint";
-
   next();
 });
 
@@ -19,7 +20,7 @@ router.get("/login", (req, res) => {
     req.session.user != undefined &&
     req.session.user.email &&
     req.session.user.email != "NONE" &&
-    (req.session.user.type == "1" || req.session.user.userType == "2")
+    (req.session.user.type == "1" || req.session.user.type == "2")
   ) {
     res.redirect("/dashboard");
     // res.send("dashboard");
@@ -160,7 +161,7 @@ router.post(
         const eventId = req.session.user.eventId;
         const userRequestType = req.session.user.requestType;
 
-        const enrollingInEvent = `insert INTO tbl_events_users (event_id,user_id) SELECT ${eventId},LAST_INSERT_ID() WHERE (SELECT is_enrollable FROM tbl_events WHERE id = ${eventId}) = 1;`;
+        const enrollingInEvent = `insert INTO tbl_events_users (event_id,user_id) SELECT ${eventId},LAST_INSERT_ID() FROM tbl_events WHERE id = 1 AND is_enrollable = 1;`;
 
         const sqlQuery = `insert into tbl_users (email,password,name_en) values (?,md5(?),?); ${
           req.session.user.requestType == 1 ? enrollingInEvent : ""
@@ -223,8 +224,174 @@ router.post(
   }
 );
 router.get("/forgetPassword", (req, res) => {
-  res.send("forgetPassword");
+  if (
+    req.session.user != undefined &&
+    req.session.user.email &&
+    req.session.user.email != "NONE" &&
+    (req.session.user.type == "1" || req.session.user.type == "2")
+  ) {
+    res.redirect("/entryPoint");
+  } else {
+    res.render("home/forgetPassword", {
+      title: global.__("forget_password"),
+    });
+  }
 });
+router.post(
+  "/forgetPassword",
+  form(field("txtEmail").trim().required().isEmail()),
+  (req, res) => {
+    if (req.form.isValid) {
+      mysqlConnection.getConnection((err, connection) => {
+        if (err) {
+        } else {
+          const sqlQuery = `
+          INSERT INTO tbl_users_forget_password (user_id) SELECT id FROM tbl_users WHERE email = ?;
+          SELECT \`uuid\` FROM tbl_users_forget_password WHERE user_id = (SELECT id FROM tbl_users WHERE email = ?) AND is_used = 0 ORDER BY id DESC LIMIT 0,1;;
+          `;
+          connection.query(
+            sqlQuery,
+            [req.body.txtEmail, req.body.txtEmail],
+            (errors, results, fields) => {
+              connection.release();
+              if (errors) {
+                console.log(errors);
+                res.render("home/forgetPassword", {
+                  title: global.__("forget_password"),
+                  errors: errors,
+                });
+              } else {
+                if (results[1].length > 0) {
+                  const uuid = results[1][0].uuid;
+
+                  const mailOptions = {
+                    from: `${defaultConfig.website_name} <${constants.email.auth.user}>`,
+                    to: req.body.txtEmail,
+                    subject: global.__("reset_password"),
+                    text: "text text text text text",
+                    template: "forgetPassword",
+                    context: {
+                      default: function (name) {
+                        return global.defaultConfig[name];
+                      },
+                      texts: function (name) {
+                        return global.__(name);
+                      },
+                      websiteTitleTwo: "",
+                      websiteTitleThree: "",
+                      forgetPasswordUrl:
+                        global.defaultConfig.website_url +
+                        "/entryPoint/resetPassword/" +
+                        uuid,
+                    },
+                  };
+                  mail.send(mailOptions).then((msg) => {});
+                  // email has been sent
+                  res.render("home/forgetPassword", {
+                    title: global.__("forget_password"),
+                    errors: "forget_password_sent",
+                  });
+                } else {
+                  // no email found
+                  res.render("home/forgetPassword", {
+                    title: global.__("forget_password"),
+                    errors: "email_not_found",
+                  });
+                }
+              }
+            }
+          );
+        }
+      });
+    }
+  }
+);
+router.get(
+  "/resetPassword/:uuid([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})",
+  (req, res) => {
+    const uuid = req.params.uuid;
+    mysqlConnection.getConnection((err, connection) => {
+      if (err) {
+        console.error(err);
+      } else {
+        const sqlQuery = `
+        SELECT 
+          users.id AS\`user_id\`,
+          users.email AS \`user_email\`,
+          users.name_en AS \`user_name_en\`,
+          users.name_ar AS \`user_name_ar\`
+        FROM
+          tbl_users_forget_password users_forget_password
+        LEFT JOIN
+          tbl_users users ON users.id = users_forget_password.user_id
+        WHERE
+          users_forget_password.\`uuid\` = ? and
+          users_forget_password.is_used != '1'
+        ORDER BY users_forget_password.id desc
+        LIMIT 0,1
+        `;
+        connection.query(sqlQuery, [uuid], (errors, results, fields) => {
+          connection.release();
+          if (errors) {
+            console.log(errors);
+            res.redirect("/entryPoint/forgetPassword/" + uuid);
+          } else {
+            if (results.length == 0) {
+              console.log("no uuid is found");
+              res.redirect("/entryPoint/forgetPassword/" + uuid);
+            } else {
+              req.session.resetPassword = {};
+              req.session.resetPassword.user = {};
+              req.session.resetPassword.user.id = results[0].user_id;
+              req.session.resetPassword.user.email = results[0].user_email;
+              req.session.resetPassword.user.nameEn = results[0].user_name_en;
+              req.session.resetPassword.user.nameAr = results[0].user_name_ar;
+
+              res.render("home/resetPassword", {
+                title: global.__("reset_password"),
+              });
+            }
+          }
+        });
+      }
+    });
+  }
+);
+router.post(
+  "/resetPassword",
+  form(
+    field("txtPassword").trim().required(),
+    field("txtPasswordConfirmation").trim().required()
+  ),
+  (req, res) => {
+    if (req.form.isValid && req.session.resetPassword != undefined) {
+      const txtPassword = req.body.txtPassword;
+      mysqlConnection.getConnection((err, connection) => {
+        const sqlQuery = `
+        UPDATE tbl_users SET \`password\` = MD5(?) WHERE id = ?
+        `;
+        connection.query(
+          sqlQuery,
+          [txtPassword, req.session.resetPassword.user.id],
+          (errors, results, fields) => {
+            if (errors) {
+              console.log(errors);
+              res.render("home/resetPassword", {
+                title: global.__("resetPassword"),
+                errors: errors,
+              });
+            } else {
+              req.session.resetPassword = undefined;
+              res.redirect("/entryPoint/login");
+            }
+          }
+        );
+      });
+    } else {
+      // return to same page
+    }
+  }
+);
 router.get("/verification", (req, res) => {
   res.send("verification");
 });
