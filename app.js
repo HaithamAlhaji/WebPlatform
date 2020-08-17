@@ -27,6 +27,7 @@ const mysqlConnection = mysql.createPool({
   database: constants.mysql.database,
   multipleStatements: true,
 });
+console.log(constants);
 mysqlConnection.getConnection((err, connection) => {
   connection;
   connection.query("select 1;", (errors, results, fields) => {
