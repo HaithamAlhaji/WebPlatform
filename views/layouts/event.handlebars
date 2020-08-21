@@ -5,6 +5,10 @@
 <head>
     {{>headContent}}
 
+    <title>{{event.title}}</title>
+    <meta property="og:title" content="{{event.title}}" />
+    <meta itemprop="name" content="{{event.title}}">
+    <meta name="twitter:title" content="{{event.title}}">
 
     <meta property="og:image" content="{{default "website_url"}}/uploads/{{event.image}}" />
     <meta itemprop="image" content="{{default "website_url"}}/uploads/{{event.image}}">
