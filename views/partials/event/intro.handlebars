@@ -84,11 +84,8 @@
 </section><!-- End Intro Section -->
 <script>
     function countdownTimer() {
-        const difference = +new Date("{{event.datetime}}") - +new Date();
-        let remaining = "Time's up!";
-
+        const difference = +new Date("{{event.datetime_timestamp}}") - +new Date();
         if (difference > 0) {
-
             const parts = {
                 days: Math.floor(difference / (1000 * 60 * 60 * 24)),
                 hours: Math.floor((difference / (1000 * 60 * 60)) % 24),

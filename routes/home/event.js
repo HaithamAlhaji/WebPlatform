@@ -15,7 +15,7 @@ router.get("/:id([0-9]+)", (req, res) => {
   const id = req.params.id;
   mysqlConnection.getConnection((err, connection) => {
     const sqlQuery = `
-    SELECT id,title,DATE_FORMAT(\`datetime\`,'%Y-%m-%d %H:%i:%s') as \`datetime\`,image,is_live,is_enrollable,is_finish,live_url,ifnull(background,'') as \`background\` from tbl_events where id = ?;
+    SELECT id,title,DATE_FORMAT(\`datetime\`,'%Y-%m-%d %H:%i:%s') as \`datetime\`, datetime as \`datetime_timestamp\`,image,is_live,is_enrollable,is_finish,live_url,ifnull(background,'') as \`background\` from tbl_events where id = ?;
     SELECT sponsors.id,sponsors.name, sponsors.image FROM tbl_events_sponsors events_sponsors LEFT JOIN  tbl_sponsors sponsors ON sponsors.id = events_sponsors.sponsor_id WHERE events_sponsors.event_id = ?;
     SELECT instructors.id,instructors.name, instructors.image FROM tbl_events_instructors events_instructors LEFT JOIN tbl_instructors instructors ON instructors.id = events_instructors.instructor_id WHERE events_instructors.event_id = ?;
     select id,image from tbl_studio_images order by id desc limit 0,8;
