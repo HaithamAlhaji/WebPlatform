@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="{{getLocale}}">
 
+
 <head>
     {{>headContent}}
-    {{#if image}}
-    <meta property="og:image" content="{{default "website_url"}}/img/{{image}}" />
-    <meta itemprop="image" content="{{default "website_url"}}/img/{{image}}">
-    <meta name="twitter:image" content="{{default "website_url"}}/img/{{image}}">
-    {{/if}}
+
+
+    <meta property="og:image" content="{{default "website_url"}}/uploads/{{event.image}}" />
+    <meta itemprop="image" content="{{default "website_url"}}/uploads/{{event.image}}">
+    <meta name="twitter:image" content="{{default "website_url"}}/uploads/{{event.image}}">
+
     <link href="/vendor/venobox/venobox.css" rel="stylesheet">
     <link href="/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="/vendor/aos/aos.css" rel="stylesheet">
