@@ -60,12 +60,22 @@
   border-bottom: 3px solid #fff;
 }
 
-#studio .studio-gallery img {
+#studio .studio-gallery .img {
+  background-origin: border-box;
+  background-clip: border-box;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 200px;
+  width: auto;
+}
+
+#studio .studio-gallery .img {
   -webkit-transition: all ease-in-out 0.4s;
   transition: all ease-in-out 0.4s;
 }
 
-#studio .studio-gallery:hover img {
+#studio .studio-gallery:hover .img {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 }

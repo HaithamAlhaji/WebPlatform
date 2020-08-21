@@ -15,7 +15,7 @@ router.get("/:id([0-9]+)", (req, res) => {
   const id = req.params.id;
   mysqlConnection.getConnection((err, connection) => {
     const sqlQuery = `
-    SELECT id,title,DATE_FORMAT(\`datetime\`,'%Y-%m-%d %h:%i:%s') as \`datetime\`,image,is_live,is_enrollable,is_finish,live_url,ifnull(background,'') as \`background\` from tbl_events where id = ?;
+    SELECT id,title,DATE_FORMAT(\`datetime\`,'%Y-%m-%d %H:%i:%s') as \`datetime\`,image,is_live,is_enrollable,is_finish,live_url,ifnull(background,'') as \`background\` from tbl_events where id = ?;
     SELECT sponsors.id,sponsors.name, sponsors.image FROM tbl_events_sponsors events_sponsors LEFT JOIN  tbl_sponsors sponsors ON sponsors.id = events_sponsors.sponsor_id WHERE events_sponsors.event_id = ?;
     SELECT instructors.id,instructors.name, instructors.image FROM tbl_events_instructors events_instructors LEFT JOIN tbl_instructors instructors ON instructors.id = events_instructors.instructor_id WHERE events_instructors.event_id = ?;
     select id,image from tbl_studio_images order by id desc limit 0,8;
@@ -40,6 +40,7 @@ router.get("/:id([0-9]+)", (req, res) => {
         var userIsEnrolled = results[8][0].user_is_enrolled;
 
         connection.release();
+        console.log(event);
         res.render("home/event", {
           title: event.title,
           event: event,
@@ -110,7 +111,7 @@ router.get("/:id([0-9]+)/certification", (req, res) => {
                 const eventTemplateDateX = results[3][0].date_x;
                 const eventTemplateDateY = results[3][0].date_y;
                 const eventTemplateCredentialX = results[3][0].credential_x;
-                const eventTemplateCredentialY = results[3][0].credential_x;
+                const eventTemplateCredentialY = results[3][0].credential_y;
                 const eventTemplateNameWidth = results[3][0].name_width;
                 const eventTemplateCreation = results[3][0].creation;
 
@@ -152,9 +153,10 @@ router.get("/:id([0-9]+)/certification", (req, res) => {
                       width: eventTemplateNameWidth,
                     }
                   );
+
                 //
                 pdf
-                  .fontSize("11")
+                  .fontSize("50")
                   .text(
                     eventTemplateCreation,
                     eventTemplateCredentialX,
@@ -164,10 +166,10 @@ router.get("/:id([0-9]+)/certification", (req, res) => {
                       width: 450,
                     }
                   );
-
+                console.log(credential);
                 //
                 pdf
-                  .fontSize("14")
+                  .fontSize("50")
                   .text(
                     credential,
                     eventTemplateCredentialX,

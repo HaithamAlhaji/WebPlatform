@@ -61,11 +61,19 @@
   border-right: 3px solid #fff;
   border-bottom: 3px solid #fff;
 }
-
-#studio .studio-gallery img {
+#studio .studio-gallery .img {
+  background-origin: border-box;
+  background-clip: border-box;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 200px;
+  width: auto;
+}
+#studio .studio-gallery .img {
   transition: all ease-in-out 0.4s;
 }
 
-#studio .studio-gallery:hover img {
+#studio .studio-gallery:hover .img {
   transform: scale(1.1);
 }
