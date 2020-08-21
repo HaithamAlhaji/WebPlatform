@@ -43,6 +43,7 @@ router.get("/:id([0-9]+)", (req, res) => {
         console.log(event);
         res.render("home/event", {
           title: event.title,
+          image: event.image,
           event: event,
           sponsors: sponsors,
           instructors: instructors,
