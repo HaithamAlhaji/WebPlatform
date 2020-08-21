@@ -13,18 +13,14 @@ router.get("/", (req, res) => {
 });
 router.get("/:id([0-9]+)", (req, res) => {
   const userAgent = req.get("User-Agent");
-  if (userAgent.includes("Instagram")) {
-    // header('Content-type: application/pdf');
-    // header('Content-Disposition: inline; filename= blablabla');
-    // header('Content-Transfer-Encoding: binary');
-    // header('Accept-Ranges: bytes');
-    res.setHeader("Content-type", "application/pdf");
-    res.setHeader("Content-Disposition", "inline; filename= blablabla");
-    res.setHeader("Content-Transfer-Encoding", "binary");
-    res.setHeader("Accept-Ranges", "bytes");
-    res.status(200).end();
-    return;
-  }
+  // if (userAgent.includes("Instagram")) {
+  //   res.setHeader("Content-type", "application/pdf");
+  //   res.setHeader("Content-Disposition", "inline; filename= blablabla");
+  //   res.setHeader("Content-Transfer-Encoding", "binary");
+  //   res.setHeader("Accept-Ranges", "bytes");
+  //   res.status(200).end();
+  //   return;
+  // }
   const id = req.params.id;
   mysqlConnection.getConnection((err, connection) => {
     const sqlQuery = `
