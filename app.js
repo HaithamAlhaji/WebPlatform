@@ -26,6 +26,7 @@ const mysqlConnection = mysql.createPool({
   password: constants.mysql.password,
   database: constants.mysql.database,
   multipleStatements: true,
+  connectionLimit: 500,
 });
 mysqlConnection.getConnection((err, connection) => {
   connection;
@@ -109,15 +110,6 @@ app.use(
   })
 );
 app.use(cookieParser(constants.express.secret));
-
-mysqlConnection.getConnection((err, connection) => {
-  if (err) {
-    console.log(err);
-  }
-  connection.query("select last_insert_id();", (errors, results, fields) => {
-    console.log(results);
-  });
-});
 
 // Start Application
 app.on("ready", () => {
