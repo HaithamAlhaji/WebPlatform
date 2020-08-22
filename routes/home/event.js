@@ -49,7 +49,6 @@ router.get("/:id([0-9]+)", (req, res) => {
         var userIsEnrolled = results[8][0].user_is_enrolled;
 
         connection.release();
-        console.log(event);
         res.render("home/event", {
           title: event.title,
           image: event.image,
@@ -97,7 +96,7 @@ router.get("/:id([0-9]+)/certification", (req, res) => {
             // download
             req.session.user.eventId = undefined;
             const sqlCertification = `
-            INSERT INTO tbl_events_users_certifications (event_id,user_id,credential) values (?,?,UUID());
+            select 1;
             SELECT credential FROM tbl_events_users_certifications WHERE id = LAST_INSERT_ID();
             SELECT title, datetime FROM tbl_events WHERE id = ?;
             SELECT id,title,template,name_x,name_y,name_width,date_x,date_y,credential_x,credential_y,creation FROM tbl_events_certifications_templates WHERE event_id = ? ORDER BY id ASC LIMIT 0,1;
@@ -164,27 +163,27 @@ router.get("/:id([0-9]+)/certification", (req, res) => {
                     }
                   );
 
+                // //
+                // pdf
+                //   .fontSize("50")
+                //   .text(
+                //     eventTemplateCreation,
+                //     eventTemplateCredentialX,
+                //     eventTemplateCredentialY - 30,
+                //     {
+                //       align: "center",
+                //       width: 450,
+                //     }
+                //   );
+                // console.log(credential);
                 //
-                pdf
-                  .fontSize("50")
-                  .text(
-                    eventTemplateCreation,
-                    eventTemplateCredentialX,
-                    eventTemplateCredentialY - 30,
-                    {
-                      align: "center",
-                      width: 450,
-                    }
-                  );
-                console.log(credential);
-                //
-                pdf
-                  .fontSize("50")
-                  .text(
-                    credential,
-                    eventTemplateCredentialX,
-                    eventTemplateCredentialY
-                  );
+                // pdf
+                //   .fontSize("50")
+                //   .text(
+                //     credential,
+                //     eventTemplateCredentialX,
+                //     eventTemplateCredentialY
+                //   );
                 res.header("Access-Control-Allow-Origin", "*");
                 res.header("Access-Control-Allow-Headers", "X-Requested-With");
                 res.header("content-type", "application/pdf");
