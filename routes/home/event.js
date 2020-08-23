@@ -96,8 +96,8 @@ router.get("/:id([0-9]+)/certification", (req, res) => {
             // download
             req.session.user.eventId = undefined;
             const sqlCertification = `
-            select 1;
-            SELECT credential FROM tbl_events_users_certifications WHERE id = LAST_INSERT_ID();
+            INSERT INTO tbl_events_users_certifications (event_id,user_id,credential) values (?,?,UUID());
+            SELECT credential,DATE_FORMAT(creation,'%Y-%m-%d') as creation FROM tbl_events_users_certifications WHERE id = LAST_INSERT_ID();
             SELECT title, datetime FROM tbl_events WHERE id = ?;
             SELECT id,title,template,name_x,name_y,name_width,date_x,date_y,credential_x,credential_y,creation FROM tbl_events_certifications_templates WHERE event_id = ? ORDER BY id ASC LIMIT 0,1;
             `;
@@ -110,9 +110,11 @@ router.get("/:id([0-9]+)/certification", (req, res) => {
                   console.log(errors);
                   res.send(errors);
                 }
-                const credential = results[1].credential;
-                const eventTitle = results[2].title;
-                const eventDatetime = results[2].datetime;
+
+                const credential = results[1][0].credential;
+                const credentialCreation = results[1][0].creation;
+                const eventTitle = results[2][0].title;
+                const eventDatetime = results[2][0].datetime;
                 const eventTemplate = results[3][0].template;
                 const eventTemplateTitle = results[3][0].title;
                 const eventTemplateNameX = results[3][0].name_x;
@@ -145,7 +147,7 @@ router.get("/:id([0-9]+)/certification", (req, res) => {
                 //
                 pdf
                   .font("./public/fonts/Cairo-Bold.ttf")
-                  .image(`./public/img/${eventTemplate}`, 0, 0, {
+                  .image(`./public/uploads/${eventTemplate}`, 0, 0, {
                     // scale: 0.24,
                   });
                 //
@@ -163,30 +165,32 @@ router.get("/:id([0-9]+)/certification", (req, res) => {
                     }
                   );
 
-                // //
-                // pdf
-                //   .fontSize("50")
-                //   .text(
-                //     eventTemplateCreation,
-                //     eventTemplateCredentialX,
-                //     eventTemplateCredentialY - 30,
-                //     {
-                //       align: "center",
-                //       width: 450,
-                //     }
-                //   );
-                // console.log(credential);
                 //
-                // pdf
-                //   .fontSize("50")
-                //   .text(
-                //     credential,
-                //     eventTemplateCredentialX,
-                //     eventTemplateCredentialY
-                //   );
+                pdf.fontSize("50").text(
+                  credentialCreation,
+                  eventTemplateCredentialX,
+                  eventTemplateCredentialY - 40
+                  // {
+                  //   align: "center",
+                  //   width: 450,
+                  // }
+                );
+
+                pdf
+                  .fontSize("50")
+                  .text(
+                    credential,
+                    eventTemplateCredentialX,
+                    eventTemplateCredentialY
+                  );
+                res.setHeader(
+                  "Content-disposition",
+                  `attachment;filename=${credential}.pdf`
+                );
                 res.header("Access-Control-Allow-Origin", "*");
                 res.header("Access-Control-Allow-Headers", "X-Requested-With");
                 res.header("content-type", "application/pdf");
+
                 pdf.end();
                 pdf.pipe(res);
                 // res.send("download");
